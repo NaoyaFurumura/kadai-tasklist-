@@ -82,6 +82,8 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
+        
+            
         $task = Task::findOrFail($id);
         
         return view('tasks.edit',[
@@ -98,6 +100,11 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
+         $request->validate([
+            'content'=>"required|max:15",
+            'status'=>'required|max:10',
+            ]);
+            
         $task = Task::findOrFail($id);
         
         $task->content=$request->content;
