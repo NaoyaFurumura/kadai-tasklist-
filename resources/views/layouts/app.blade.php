@@ -8,24 +8,10 @@
     </head>
     
     <body>
-        <header class="mb-4">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                <a class="navbar-brand" href="/">Tasklist</a>
-                
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <div class="collapse navbar-collapse" id="nav-bar">
-                    <ul class="navbar-nav mr-auto"></ul>
-                    <ul class="navbar-nav">
-                        <li class='nav-item'>{!! link_to_route('tasks.create', '新規タスクを追加する', [], ['class' => 'nav-link']) !!}</li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        
+       
+           @include('layouts.navbar')
         <div class="container">
+            @include('layouts.error_messages')
             @yield('content');
         </div>
          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
