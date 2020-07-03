@@ -30,5 +30,5 @@
     
     
    {!! link_to_route('tasks.create', '新規タスクを追加する', [], ['class' => 'btn btn-primary']) !!}
-    {{ $tasks->links() }}
+{{ $tasks->links() }}
 @endsection

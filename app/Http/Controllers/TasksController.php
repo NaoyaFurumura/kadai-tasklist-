@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Task;
 
+use Illuminate\Support\Facades\Auth;
+
 class TasksController extends Controller
 {
     /**
@@ -38,10 +40,15 @@ class TasksController extends Controller
     {
         $task = new Task;
         
-        return view('tasks.create',[
+       if(Auth::check()){
+           return view('tasks.create',[
             'task'=>$task,
             ]);
-            
+       }else{
+           return redirect('/');
+       }
+        
+         
             
     }
 
@@ -97,11 +104,15 @@ class TasksController extends Controller
         
             
         $task = Task::findOrFail($id);
-         if(\Auth::id()===$task->user_id)
-        
-        return view('tasks.edit',[
+         if(\Auth::id()===$task->user_id){
+              return view('tasks.edit',[
             "task"=>$task,
             ]);
+         }else{
+             return redirect('/');
+         }
+        
+        
     }
 
     /**
@@ -124,7 +135,7 @@ class TasksController extends Controller
                 $task->status=$request->status;
                 $task->save();
         }else{
-             redirect('/');
+            return redirect('/');
         }
         return redirect('/');
     }
@@ -142,7 +153,7 @@ class TasksController extends Controller
        if(\Auth::id()===$task->user_id){
            $task->delete();
        }else{
-           redirect('/');
+           return redirect('/');
        }
         
         return redirect('/');
